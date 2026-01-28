@@ -1,2 +1,2 @@
-# McMaster-Venture-Capital-Club
-McMaster Venture Capital Club website - commission from 1xd3
+# McMaster Venture Capital Club (MVCC)
+Official website developed by Aleesha Abdullah, Caden Chan, Gurehmat Chahal & Matthew Kolesnik for COMPSCI 1XD3
