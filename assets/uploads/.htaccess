@@ -1,0 +1,7 @@
+# Restrict direct access to the uploads directory to image files only.
+# Script execution is forbidden.
+Options -Indexes -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .sh .cgi
+<FilesMatch "\.(php|php\d|phtml|php7|php8)$">
+    Require all denied
+</FilesMatch>
