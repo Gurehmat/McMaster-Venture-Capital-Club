@@ -1,18 +1,6 @@
-/* ============================================================
-   McMaster Venture Capital Club — Main Stylesheet
-   Fonts: Playfair Display (serif headings) + Inter (body)
-   Colors:
-     --red:         #7a0000
-     --brown:       #845a12
-     --gold:        #c29e61
-     --pastel-gold: #e7cb9b
-     --dark-grey:   #323131
-     --black:       #1a1a1a
-   ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
-/* ── CSS Variables ────────────────────────────────────────── */
 :root {
   --red:         #7a0000;
   --red-light:   #a00000;
@@ -29,7 +17,6 @@
   --transition:  .3s cubic-bezier(.4,0,.2,1);
 }
 
-/* ── Reset / Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
@@ -50,7 +37,6 @@ img { max-width: 100%; display: block; }
 a   { color: var(--gold); text-decoration: none; transition: color var(--transition); }
 a:hover { color: var(--pastel-gold); }
 
-/* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, h4, h5 {
   font-family: 'Playfair Display', Georgia, serif;
   color: var(--white);
@@ -77,7 +63,6 @@ h1, h2, h3, h4, h5 {
   border-radius: 2px;
 }
 
-/* ── Sections ─────────────────────────────────────────────── */
 .mvcc-section {
   padding: 90px 0;
   scroll-margin-top: 96px;
@@ -86,7 +71,6 @@ h1, h2, h3, h4, h5 {
   background-color: var(--surface);
 }
 
-/* ── Navbar ───────────────────────────────────────────────── */
 #mainNav {
   background: rgba(26,26,26,.96);
   backdrop-filter: blur(12px);
@@ -129,7 +113,6 @@ h1, h2, h3, h4, h5 {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c29e61' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* ── Buttons ──────────────────────────────────────────────── */
 .btn-mvcc-primary {
   background: linear-gradient(135deg, var(--red) 0%, var(--red-light) 100%);
   color: var(--white);
@@ -174,7 +157,6 @@ h1, h2, h3, h4, h5 {
   padding: .45rem 1.1rem;
 }
 
-/* ── Hero ─────────────────────────────────────────────────── */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -244,7 +226,6 @@ h1, h2, h3, h4, h5 {
   50%      { transform: translateX(-50%) translateY(8px); }
 }
 
-/* ── Stats Bar ────────────────────────────────────────────── */
 .stats-bar {
   background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 100%);
   border-top: 1px solid var(--border);
@@ -267,11 +248,9 @@ h1, h2, h3, h4, h5 {
   margin-top: .35rem;
 }
 
-/* ── History ──────────────────────────────────────────────── */
 .history-text { color: rgba(231,203,155,.85); line-height: 1.85; }
 .history-text p + p { margin-top: 1rem; }
 
-/* ── Roadmap ──────────────────────────────────────────────── */
 .roadmap-timeline {
   position: relative;
   padding-left: 0;
@@ -295,6 +274,8 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 3rem;
   position: relative;
   align-items: flex-start;
+  list-style: none;
+  padding-left: 0;
 }
 @media (min-width: 768px) {
   .roadmap-item:nth-child(odd)  { flex-direction: row-reverse; }
@@ -323,11 +304,7 @@ h1, h2, h3, h4, h5 {
 }
 .roadmap-card h4 { font-size: 1.05rem; margin-bottom: .5rem; }
 .roadmap-card p  { font-size: .88rem; color: var(--text-muted); margin: 0; }
-.roadmap-dot {
-  display: none;
-}
 
-/* ── Cards (Events / Exec) ────────────────────────────────── */
 .mvcc-card {
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -370,7 +347,6 @@ h1, h2, h3, h4, h5 {
 .mvcc-card-title { font-size: 1.05rem; margin-bottom: .6rem; }
 .mvcc-card-text  { font-size: .875rem; color: var(--text-muted); margin: 0; }
 
-/* ── Executive Cards ──────────────────────────────────────── */
 .exec-card {
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -423,7 +399,6 @@ h1, h2, h3, h4, h5 {
 }
 .exec-linkedin:hover { color: var(--gold); }
 
-/* ── Partners ─────────────────────────────────────────────── */
 .partner-row-title {
   font-size: .75rem;
   letter-spacing: .2em;
@@ -464,7 +439,6 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 2.5rem;
 }
 
-/* ── Join / Form ──────────────────────────────────────────── */
 #join { background: var(--surface); }
 .form-mvcc .form-label {
   font-size: .78rem;
@@ -518,7 +492,6 @@ h1, h2, h3, h4, h5 {
   color: #ff6b6b;
 }
 
-/* ── Footer ───────────────────────────────────────────────── */
 footer {
   background: #111;
   border-top: 1px solid var(--border);
@@ -552,7 +525,6 @@ footer {
 }
 .footer-links a:hover { color: var(--gold); }
 
-/* ── Loading skeleton ─────────────────────────────────────── */
 .skeleton {
   background: linear-gradient(90deg, var(--surface-2) 25%, var(--dark-grey) 50%, var(--surface-2) 75%);
   background-size: 200% 100%;
@@ -564,13 +536,11 @@ footer {
   100% { background-position: -200% 0; }
 }
 
-/* ── Utilities ─────────────────────────────────────────────── */
 .text-gold   { color: var(--gold) !important; }
 .text-red    { color: var(--red) !important; }
 .border-gold { border-color: var(--gold) !important; }
 .bg-surface  { background-color: var(--surface) !important; }
 
-/* ── Responsive tweaks ────────────────────────────────────── */
 @media (max-width: 576px) {
   .hero-cta { flex-direction: column; }
   .btn-mvcc-primary, .btn-mvcc-outline { text-align: center; }
@@ -578,7 +548,6 @@ footer {
   .stat-number      { font-size: 1.7rem; }
 }
 
-/* ── Admin overrides (used when admin styles are needed) ──── */
 .admin-sidebar {
   background: var(--surface);
   border-right: 1px solid var(--border);
@@ -638,4 +607,275 @@ footer {
   border-radius: 2px;
   letter-spacing: .06em;
   text-transform: uppercase;
+}
+
+.admin-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(122,0,0,.18), transparent 34%),
+    radial-gradient(circle at top right, rgba(194,158,97,.08), transparent 28%),
+    var(--black);
+}
+
+.admin-auth {
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.admin-auth-card {
+  width: min(100%, 470px);
+  background: linear-gradient(180deg, rgba(44,43,43,.96), rgba(32,32,32,.96));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  padding: 2.5rem;
+}
+
+.admin-auth-mark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1rem;
+  border: 1px solid rgba(194,158,97,.3);
+  background: rgba(194,158,97,.08);
+  color: var(--gold);
+  font-size: 1.4rem;
+}
+
+.admin-auth-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.85rem;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: .35rem;
+}
+
+.admin-auth-title span { color: var(--gold); }
+
+.admin-auth-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .9rem;
+  margin-bottom: 1.75rem;
+}
+
+.admin-alert {
+  margin-bottom: 1rem;
+  padding: .85rem 1rem;
+  border-radius: 8px;
+  font-size: .875rem;
+}
+
+.admin-alert--error {
+  background: rgba(122,0,0,.2);
+  border: 1px solid var(--red-light);
+  color: #ff6b6b;
+}
+
+.admin-auth-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.admin-auth-footer a {
+  font-size: .78rem;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.admin-auth-footer a:hover { color: var(--gold); }
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar-panel {
+  width: 250px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, rgba(32,32,32,.98), rgba(17,17,17,.98));
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-brand {
+  padding: 1.5rem 1.35rem 1rem;
+  border-bottom: 1px solid rgba(194,158,97,.12);
+}
+
+.admin-sidebar-brand h1 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.admin-sidebar-brand h1 span { color: var(--gold); }
+
+.admin-sidebar-brand p {
+  margin: .45rem 0 0;
+  color: var(--text-muted);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: 1rem .8rem .8rem;
+}
+
+.admin-nav-link {
+  display: block;
+  padding: .8rem 1rem;
+  color: var(--pastel-gold);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all var(--transition);
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+  color: var(--gold);
+  border-color: rgba(194,158,97,.2);
+  background: rgba(194,158,97,.08);
+}
+
+.admin-nav-link--muted { color: var(--text-muted); }
+.admin-nav-link--danger { color: #ff8080; }
+
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.admin-header-title h2 {
+  margin: 0 0 .35rem;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.admin-header-title p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .88rem;
+}
+
+.admin-user-chip {
+  border: 1px solid rgba(194,158,97,.2);
+  background: rgba(194,158,97,.08);
+  color: var(--pastel-gold);
+  border-radius: 999px;
+  padding: .65rem 1rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-user-chip strong { color: var(--gold); }
+
+.admin-panel {
+  background: linear-gradient(180deg, rgba(44,43,43,.94), rgba(32,32,32,.94));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.28);
+  overflow: hidden;
+}
+
+.admin-panel__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(194,158,97,.12);
+}
+
+.admin-panel__eyebrow {
+  color: var(--gold);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.admin-panel__body {
+  padding: 1.25rem;
+}
+
+.admin-form-section {
+  background: linear-gradient(180deg, rgba(44,43,43,.96), rgba(32,32,32,.96));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 16px 40px rgba(0,0,0,.22);
+}
+
+.admin-form-section h3 {
+  font-size: 1.05rem;
+  margin-bottom: 1.15rem;
+  color: var(--white);
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-button-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .admin-dashboard {
+    flex-direction: column;
+  }
+
+  .admin-sidebar-panel {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .admin-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 1rem;
+  }
+
+  .admin-auth-card {
+    padding: 2rem 1.3rem;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-user-chip {
+    white-space: normal;
+  }
 }

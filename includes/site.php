@@ -1,13 +1,10 @@
 <?php
-/**
- * Shared site helpers.
- */
-
 function mvcc_base_url(): string {
     $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
-    $basePath = str_starts_with($scriptName, '/admin/')
-        ? dirname(dirname($scriptName))
-        : dirname($scriptName);
+    $scriptDir = dirname($scriptName);
+    $basePath = str_ends_with($scriptDir, '/admin')
+        ? dirname($scriptDir)
+        : $scriptDir;
 
     $basePath = rtrim($basePath, '/');
     return $basePath === '' ? '/' : $basePath . '/';

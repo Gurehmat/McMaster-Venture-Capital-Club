@@ -107,4 +107,4 @@ INSERT INTO events (title, event_date, location, description, image_url) VALUES
 -- ─────────────────────────────────────────────
 
 INSERT INTO admins (username, password_hash) VALUES
-('admin', 'REPLACE_WITH_BCRYPT_HASH');
+('admin123', '$2y$10$u7FgIuCAe8oNkZJeW4LYPuNive.7yqjspKPkWyySCMoS1Q0OUoinS');

@@ -1,10 +1,3 @@
-/**
- * McMaster Venture Capital Club — main.js
- * Handles: events render, exec render, partners render,
- *          join-form AJAX submit, live email check.
- */
-
-/* ── Helpers ──────────────────────────────────────────────── */
 function formatDate(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -27,7 +20,6 @@ function resolveMediaUrl(value) {
   return `${base}${String(value).replace(/^\/+/, '')}`;
 }
 
-/* ── Skeleton loaders ─────────────────────────────────────── */
 function skeletonCard() {
   return `
   <div class="col-md-4">
@@ -53,12 +45,9 @@ function skeletonExec() {
   </div>`;
 }
 
-/* ── Events ───────────────────────────────────────────────── */
 async function loadEvents() {
   const container = document.getElementById('events-grid');
   if (!container) return;
-
-  // Show 3 skeleton cards while loading
   container.innerHTML = [skeletonCard(), skeletonCard(), skeletonCard()].join('');
 
   try {
@@ -99,7 +88,6 @@ async function loadEvents() {
   }
 }
 
-/* ── Executives ───────────────────────────────────────────── */
 async function loadExecutives() {
   const container = document.getElementById('exec-grid');
   if (!container) return;
@@ -148,7 +136,6 @@ async function loadExecutives() {
   }
 }
 
-/* ── Partners ─────────────────────────────────────────────── */
 async function loadPartners() {
   const partnersContainer   = document.getElementById('partners-row');
   const associatedContainer = document.getElementById('associated-row');
@@ -179,7 +166,6 @@ async function loadPartners() {
   }
 }
 
-/* ── Join Form ────────────────────────────────────────────── */
 let emailChecking = false;
 let emailValid    = null; // null=unchecked, true=available, false=taken
 
@@ -218,8 +204,6 @@ function initJoinForm() {
   const msgBox    = document.getElementById('form-message');
   const submitBtn = document.getElementById('join-submit');
   if (!form) return;
-
-  // Live email check on blur
   emailInp?.addEventListener('blur', () => {
     const val = emailInp.value.trim();
     if (val && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
@@ -235,8 +219,6 @@ function initJoinForm() {
     const program     = document.getElementById('input-program')?.value.trim() ?? '';
     const year        = document.getElementById('input-year')?.value ?? '';
     const interest    = document.getElementById('input-interest')?.value.trim() ?? '';
-
-    // Basic client-side validation
     let hasError = false;
     if (!fullName) {
       document.getElementById('input-fullname')?.classList.add('is-invalid');
@@ -293,7 +275,6 @@ function initJoinForm() {
   }
 }
 
-/* ── Navbar scroll shadow ─────────────────────────────────── */
 function initNavbarScroll() {
   const nav = document.getElementById('mainNav');
   if (!nav) return;
@@ -304,7 +285,6 @@ function initNavbarScroll() {
   }, { passive: true });
 }
 
-/* ── Init ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   loadEvents();

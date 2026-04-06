@@ -1,7 +1,4 @@
 <?php
-/**
- * events.php — All events listing page
- */
 require_once __DIR__ . '/includes/site.php';
 $baseUrl = mvcc_base_url();
 ?>
@@ -18,7 +15,6 @@ $baseUrl = mvcc_base_url();
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav id="mainNav" class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand" href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>index.php">
@@ -45,7 +41,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </nav>
 
-<!-- PAGE HEADER -->
 <div style="padding-top:100px; padding-bottom:60px; background:var(--surface); border-bottom:1px solid var(--border);">
   <div class="container">
     <p class="section-subtitle">McMaster Venture Capital Club</p>
@@ -54,11 +49,9 @@ $baseUrl = mvcc_base_url();
   </div>
 </div>
 
-<!-- EVENTS GRID -->
 <section class="mvcc-section">
   <div class="container">
 
-    <!-- Filter bar (client-side, no page reload) -->
     <div class="d-flex align-items-center gap-3 mb-5 flex-wrap">
       <input type="search" id="event-filter" class="form-control form-mvcc"
              style="max-width:320px;" placeholder="Search events…" aria-label="Filter events">
@@ -66,7 +59,7 @@ $baseUrl = mvcc_base_url();
     </div>
 
     <div id="events-all-grid" class="row g-4" aria-live="polite">
-      <!-- Populated by JS -->
+
     </div>
 
     <div id="events-empty" class="text-center py-5" style="display:none; color:var(--text-muted);">
@@ -76,7 +69,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="row align-items-center g-3">

@@ -1,8 +1,4 @@
 <?php
-/**
- * index.php — McMaster Venture Capital Club
- * Single-scroll public page.
- */
 require_once __DIR__ . '/includes/site.php';
 $baseUrl = mvcc_base_url();
 ?>
@@ -14,19 +10,14 @@ $baseUrl = mvcc_base_url();
   <meta name="description" content="McMaster Venture Capital Club — empowering the next generation of entrepreneurs and investors at McMaster University.">
   <title>McMaster Venture Capital Club</title>
 
-  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles (overrides Bootstrap branding) -->
+
   <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>assets/css/style.css">
 
-  <!-- Favicon placeholder -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════
-     NAVBAR
-═══════════════════════════════════════════════════════════ -->
 <nav id="mainNav" class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand" href="#hero">
@@ -54,9 +45,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 1 — HERO
-═══════════════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="container">
     <div class="hero-content">
@@ -84,9 +72,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     STATS BAR
-═══════════════════════════════════════════════════════════ -->
 <div class="stats-bar">
   <div class="container">
     <div class="row g-0 text-center">
@@ -112,9 +97,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 2 — HISTORY & MISSION
-═══════════════════════════════════════════════════════════ -->
 <section id="about" class="mvcc-section mvcc-section--dark">
   <div class="container">
     <div class="row justify-content-center">
@@ -152,7 +134,7 @@ $baseUrl = mvcc_base_url();
         </div>
       </div>
       <div class="col-lg-5 offset-lg-1">
-        <!-- Decorative quote block -->
+
         <blockquote style="border-left: 3px solid var(--gold); padding: 1.5rem 2rem; background:var(--surface-2); border-radius:0 4px 4px 0;">
           <p style="font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--white); margin:0 0 1rem;">
             "We didn't just want to learn about venture capital —<br>we wanted to <em>live</em> it."
@@ -171,9 +153,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 3 — 5-YEAR ROADMAP
-═══════════════════════════════════════════════════════════ -->
 <section id="roadmap" class="mvcc-section">
   <div class="container">
     <div class="row justify-content-center">
@@ -186,7 +165,6 @@ $baseUrl = mvcc_base_url();
 
     <ul class="roadmap-timeline list-unstyled" aria-label="MVCC Five-Year Roadmap">
 
-      <!-- Year 1 -->
       <li class="roadmap-item">
         <div class="roadmap-card">
           <div class="roadmap-year">Year 1 <span style="font-size:.85rem;color:var(--text-muted)">· 2024–25</span></div>
@@ -197,12 +175,9 @@ $baseUrl = mvcc_base_url();
             and startup founders.
           </p>
         </div>
-        <div class="roadmap-dot" aria-hidden="true"></div>
       </li>
 
-      <!-- Year 2 -->
       <li class="roadmap-item">
-        <div class="roadmap-dot d-none d-md-block" aria-hidden="true"></div>
         <div class="roadmap-card">
           <div class="roadmap-year">Year 2 <span style="font-size:.85rem;color:var(--text-muted)">· 2025–26</span></div>
           <h4>Education &amp; Deal Flow</h4>
@@ -214,7 +189,6 @@ $baseUrl = mvcc_base_url();
         </div>
       </li>
 
-      <!-- Year 3 -->
       <li class="roadmap-item">
         <div class="roadmap-card">
           <div class="roadmap-year">Year 3 <span style="font-size:.85rem;color:var(--text-muted)">· 2026–27</span></div>
@@ -225,12 +199,9 @@ $baseUrl = mvcc_base_url();
             into a student-founded company.
           </p>
         </div>
-        <div class="roadmap-dot" aria-hidden="true"></div>
       </li>
 
-      <!-- Year 4 -->
       <li class="roadmap-item">
-        <div class="roadmap-dot d-none d-md-block" aria-hidden="true"></div>
         <div class="roadmap-card">
           <div class="roadmap-year">Year 4 <span style="font-size:.85rem;color:var(--text-muted)">· 2027–28</span></div>
           <h4>National Presence</h4>
@@ -242,7 +213,6 @@ $baseUrl = mvcc_base_url();
         </div>
       </li>
 
-      <!-- Year 5 -->
       <li class="roadmap-item">
         <div class="roadmap-card">
           <div class="roadmap-year">Year 5 <span style="font-size:.85rem;color:var(--text-muted)">· 2028–29</span></div>
@@ -253,16 +223,12 @@ $baseUrl = mvcc_base_url();
             into top Canadian and US venture firms.
           </p>
         </div>
-        <div class="roadmap-dot" aria-hidden="true"></div>
       </li>
 
     </ul>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 4 — PAST EVENTS
-═══════════════════════════════════════════════════════════ -->
 <section id="events" class="mvcc-section mvcc-section--dark">
   <div class="container">
     <div class="row justify-content-center">
@@ -273,7 +239,7 @@ $baseUrl = mvcc_base_url();
       </div>
     </div>
     <div id="events-grid" class="row">
-      <!-- Populated by main.js via /api/get_events.php -->
+
     </div>
     <div class="text-center mt-3">
       <a href="events.php" class="btn-mvcc-outline">View All Events →</a>
@@ -281,9 +247,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 5 — EXECUTIVE TEAM
-═══════════════════════════════════════════════════════════ -->
 <section id="team" class="mvcc-section">
   <div class="container">
     <div class="row justify-content-center">
@@ -294,14 +257,11 @@ $baseUrl = mvcc_base_url();
       </div>
     </div>
     <div id="exec-grid" class="row justify-content-center">
-      <!-- Populated by main.js via /api/get_executives.php -->
+
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 6 — PARTNERS
-═══════════════════════════════════════════════════════════ -->
 <section id="partners" class="mvcc-section mvcc-section--dark">
   <div class="container">
     <div class="row justify-content-center">
@@ -315,22 +275,19 @@ $baseUrl = mvcc_base_url();
     <div class="mb-4">
       <p class="partner-row-title">Partners</p>
       <div id="partners-row" class="partners-flex">
-        <!-- Populated by main.js via /api/get_partners.php -->
+
       </div>
     </div>
 
     <div>
       <p class="partner-row-title">Associated With</p>
       <div id="associated-row" class="partners-flex">
-        <!-- Populated by main.js via /api/get_partners.php -->
+
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 7 — JOIN US
-═══════════════════════════════════════════════════════════ -->
 <section id="join" class="mvcc-section">
   <div class="container">
     <div class="row justify-content-center">
@@ -404,9 +361,6 @@ $baseUrl = mvcc_base_url();
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════════════════ -->
 <footer>
   <div class="container">
     <div class="row align-items-center g-3">
@@ -427,9 +381,8 @@ $baseUrl = mvcc_base_url();
   </div>
 </footer>
 
-<!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- MVCC main script -->
+
 <script>window.MVCC_BASE_URL = <?= json_encode($baseUrl) ?>;</script>
 <script src="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>assets/js/main.js"></script>
 </body>
