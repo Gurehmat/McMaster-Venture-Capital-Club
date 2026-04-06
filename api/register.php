@@ -27,6 +27,7 @@ $interest_area = trim($body['interest_area'] ?? '');
 $errors = [];
 if ($full_name === '') $errors[] = 'Full name is required.';
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'A valid email is required.';
+if ($email !== '' && !preg_match('/@mcmaster\.ca$/i', $email)) $errors[] = 'Please use a valid McMaster email address.';
 if ($errors) {
     http_response_code(422);
     echo json_encode(['success' => false, 'errors' => $errors]);

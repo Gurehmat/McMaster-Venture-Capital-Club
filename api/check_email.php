@@ -13,6 +13,10 @@ if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['available' => false, 'error' => 'Invalid email address.']);
     exit;
 }
+if (!preg_match('/@mcmaster\.ca$/i', $email)) {
+    echo json_encode(['available' => false, 'error' => 'Please use a valid McMaster email address.']);
+    exit;
+}
 
 $db   = getDB();
 $stmt = $db->prepare('SELECT id FROM members WHERE email = ? LIMIT 1');

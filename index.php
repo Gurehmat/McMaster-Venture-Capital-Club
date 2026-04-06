@@ -3,6 +3,8 @@
  * index.php — McMaster Venture Capital Club
  * Single-scroll public page.
  */
+require_once __DIR__ . '/includes/site.php';
+$baseUrl = mvcc_base_url();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +17,7 @@
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles (overrides Bootstrap branding) -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>assets/css/style.css">
 
   <!-- Favicon placeholder -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
@@ -44,8 +46,8 @@
         <li class="nav-item"><a class="nav-link" href="#partners">Partners</a></li>
         <li class="nav-item"><a class="nav-link" href="#join">Join Us</a></li>
         <li class="nav-item ms-lg-2">
-          <a class="nav-link btn-mvcc-outline btn-mvcc-sm d-inline-block mt-1 mt-lg-0"
-             href="events.php">All Events</a>
+           <a class="nav-link btn-mvcc-outline btn-mvcc-sm d-inline-block mt-1 mt-lg-0"
+             href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>events.php">All Events</a>
         </li>
       </ul>
     </div>
@@ -359,7 +361,7 @@
           <div class="mb-3">
             <label for="input-email" class="form-label">McMaster Email <span style="color:var(--red-light)">*</span></label>
             <input type="email" class="form-control" id="input-email"
-                   placeholder="smithj@mcmaster.ca" required maxlength="255">
+                   placeholder="smithj@mcmaster.ca" required maxlength="255" pattern=".+@mcmaster\.ca$">
             <div id="email-feedback" style="display:none; font-size:.8rem; margin-top:.3rem;"></div>
           </div>
 
@@ -418,7 +420,7 @@
           <li><a href="#events">Events</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="https://linktr.ee/macventurecapital" target="_blank" rel="noopener">Linktree</a></li>
-          <li><a href="/admin/login.php">Admin</a></li>
+          <li><a href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>admin/login.php">Admin</a></li>
         </ul>
       </div>
     </div>
@@ -428,6 +430,7 @@
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- MVCC main script -->
-<script src="/assets/js/main.js"></script>
+<script>window.MVCC_BASE_URL = <?= json_encode($baseUrl) ?>;</script>
+<script src="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>assets/js/main.js"></script>
 </body>
 </html>

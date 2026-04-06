@@ -20,6 +20,13 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function resolveMediaUrl(value) {
+  if (!value) return '';
+  if (/^(?:https?:)?\/\//i.test(value) || value.startsWith('data:')) return value;
+  const base = window.MVCC_BASE_URL || '/';
+  return `${base}${String(value).replace(/^\/+/, '')}`;
+}
+
 /* ── Skeleton loaders ─────────────────────────────────────── */
 function skeletonCard() {
   return `
@@ -55,7 +62,7 @@ async function loadEvents() {
   container.innerHTML = [skeletonCard(), skeletonCard(), skeletonCard()].join('');
 
   try {
-    const res  = await fetch('/api/get_events.php');
+    const res  = await fetch(`${window.MVCC_BASE_URL || '/'}api/get_events.php`);
     const data = await res.json();
 
     if (!data.success || !data.events.length) {
@@ -65,7 +72,7 @@ async function loadEvents() {
 
     container.innerHTML = data.events.map(ev => {
       const imgHtml = ev.image_url
-        ? `<img src="${escapeHtml(ev.image_url)}" alt="${escapeHtml(ev.title)}" class="mvcc-card-img" style="height:200px;object-fit:cover;">` // TODO: swap in real image
+        ? `<img src="${escapeHtml(resolveMediaUrl(ev.image_url))}" alt="${escapeHtml(ev.title)}" class="mvcc-card-img" style="height:200px;object-fit:cover;">`
         : `<div class="mvcc-card-img" style="height:200px;background:var(--surface);">
              <span style="color:var(--text-muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin:auto;display:block;text-align:center;padding-top:5.5rem;">
                No Image
@@ -78,6 +85,7 @@ async function loadEvents() {
           ${imgHtml}
           <div class="mvcc-card-body">
             <div class="mvcc-card-date">${formatDate(ev.event_date)}</div>
+            ${ev.location ? `<div class="mvcc-card-meta">${escapeHtml(ev.location)}</div>` : ''}
             <h4 class="mvcc-card-title">${escapeHtml(ev.title)}</h4>
             <p class="mvcc-card-text">${escapeHtml(ev.description || '')}</p>
           </div>
@@ -99,7 +107,7 @@ async function loadExecutives() {
   container.innerHTML = Array(7).fill(skeletonExec()).join('');
 
   try {
-    const res  = await fetch('/api/get_executives.php');
+    const res  = await fetch(`${window.MVCC_BASE_URL || '/'}api/get_executives.php`);
     const data = await res.json();
 
     if (!data.success || !data.executives.length) {
@@ -110,7 +118,7 @@ async function loadExecutives() {
     container.innerHTML = data.executives.map(ex => {
       const initials = ex.full_name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
       const avatarHtml = ex.photo_url
-        ? `<img src="${escapeHtml(ex.photo_url)}" alt="${escapeHtml(ex.full_name)}">` // TODO: swap in real image
+        ? `<img src="${escapeHtml(resolveMediaUrl(ex.photo_url))}" alt="${escapeHtml(ex.full_name)}">`
         : `<span style="font-size:1.5rem;font-weight:700;color:var(--gold);line-height:80px;">${initials}</span>`;
 
       const linkedinHtml = ex.linkedin_url
@@ -128,6 +136,7 @@ async function loadExecutives() {
           <div class="exec-avatar">${avatarHtml}</div>
           <h5 class="exec-name">${escapeHtml(ex.full_name)}</h5>
           <div class="exec-role">${escapeHtml(ex.role || '')}</div>
+          ${ex.bio ? `<p class="exec-bio">${escapeHtml(ex.bio)}</p>` : ''}
           ${linkedinHtml}
         </div>
       </div>`;
@@ -146,12 +155,12 @@ async function loadPartners() {
   if (!partnersContainer) return;
 
   try {
-    const res  = await fetch('/api/get_partners.php');
+    const res  = await fetch(`${window.MVCC_BASE_URL || '/'}api/get_partners.php`);
     const data = await res.json();
 
     const renderChips = (list) => list.map(p => {
       const inner = p.logo_url
-        ? `<img src="${escapeHtml(p.logo_url)}" alt="${escapeHtml(p.name)}" class="partner-logo me-2">` // TODO: swap in real image
+        ? `<img src="${escapeHtml(resolveMediaUrl(p.logo_url))}" alt="${escapeHtml(p.name)}" class="partner-logo me-2">`
         : '';
       const tag = p.website_url
         ? `<a href="${escapeHtml(p.website_url)}" target="_blank" rel="noopener" class="partner-chip">${inner}${escapeHtml(p.name)}</a>`
@@ -185,7 +194,7 @@ async function checkEmail(email) {
   if (feedback) { feedback.textContent = 'Checking…'; feedback.style.display = 'block'; feedback.style.color = 'var(--text-muted)'; }
 
   try {
-    const res  = await fetch(`/api/check_email.php?email=${encodeURIComponent(email)}`);
+    const res  = await fetch(`${window.MVCC_BASE_URL || '/'}api/check_email.php?email=${encodeURIComponent(email)}`);
     const data = await res.json();
     emailValid = data.available;
     if (data.available) {
@@ -193,7 +202,7 @@ async function checkEmail(email) {
       if (feedback) { feedback.textContent = 'Email is available.'; feedback.style.color = '#6bc46b'; }
     } else {
       input.classList.add('is-invalid');
-      if (feedback) { feedback.textContent = 'That email is already registered.'; feedback.style.color = '#ff6b6b'; }
+      if (feedback) { feedback.textContent = data.error || 'That email is already registered.'; feedback.style.color = '#ff6b6b'; }
     }
   } catch {
     emailValid = null;
@@ -235,7 +244,7 @@ function initJoinForm() {
     } else {
       document.getElementById('input-fullname')?.classList.remove('is-invalid');
     }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/@mcmaster\.ca$/i.test(email)) {
       emailInp?.classList.add('is-invalid');
       hasError = true;
     }
@@ -250,7 +259,7 @@ function initJoinForm() {
     submitBtn.textContent = 'Submitting…';
 
     try {
-      const res = await fetch('/api/register.php', {
+      const res = await fetch(`${window.MVCC_BASE_URL || '/'}api/register.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ full_name: fullName, email, program, year_of_study: year, interest_area: interest }),

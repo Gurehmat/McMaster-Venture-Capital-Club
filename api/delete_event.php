@@ -5,7 +5,8 @@
  */
 
 header('Content-Type: application/json');
-session_start();
+require_once __DIR__ . '/../includes/site.php';
+mvcc_start_session();
 if (empty($_SESSION['admin_id'])) {
     http_response_code(401);
     echo json_encode(['success' => false, 'error' => 'Unauthorized.']);
@@ -16,6 +17,12 @@ require_once __DIR__ . '/../db/config.php';
 
 $body = json_decode(file_get_contents('php://input'), true);
 if (!$body) $body = $_POST;
+
+if (!mvcc_verify_csrf($body['csrf_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null))) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'error' => 'Invalid CSRF token.']);
+    exit;
+}
 
 $id = isset($body['id']) ? (int)$body['id'] : 0;
 if ($id <= 0) {
@@ -31,7 +38,7 @@ $stmt = $db->prepare('SELECT image_url FROM events WHERE id = ? LIMIT 1');
 $stmt->execute([$id]);
 $row = $stmt->fetch();
 if ($row && $row['image_url']) {
-    $path = __DIR__ . '/..' . $row['image_url'];
+    $path = __DIR__ . '/../' . ltrim($row['image_url'], '/');
     if (file_exists($path)) @unlink($path);
 }
 

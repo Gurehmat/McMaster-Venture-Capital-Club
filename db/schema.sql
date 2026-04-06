@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS events (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(255) NOT NULL,
     event_date  DATE         NOT NULL,
+    location    VARCHAR(255),
     description TEXT,
     image_url   VARCHAR(500),
     created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS executives (
     id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name     VARCHAR(150) NOT NULL,
     role          VARCHAR(150),
+    bio           TEXT,
     linkedin_url  VARCHAR(500),
     photo_url     VARCHAR(500),
     display_order TINYINT UNSIGNED DEFAULT 0
@@ -55,14 +57,14 @@ CREATE TABLE IF NOT EXISTS executives (
 --  SEED DATA — Executives
 -- ─────────────────────────────────────────────
 
-INSERT INTO executives (full_name, role, linkedin_url, photo_url, display_order) VALUES
-('Veer Sarin',         'Co-founder',       NULL, NULL, 1),
-('Diya Shah',          'Co-founder',       NULL, NULL, 2),
-('Benicio Uhart',      'Co-founder',       NULL, NULL, 3),
-('Josh Michell',       'VP Operations',    NULL, NULL, 4),
-('Hannah Lewin',       'VP Marketing',     NULL, NULL, 5),
-('Hunaid Rajkotwala',  'Co-VP Education',  NULL, NULL, 6),
-('Abhay Shenoy',       'Co-VP Education',  NULL, NULL, 7);
+INSERT INTO executives (full_name, role, bio, linkedin_url, photo_url, display_order) VALUES
+('Veer Sarin',         'Co-founder',       'Co-founded MVCC to build a direct bridge between McMaster students and the venture ecosystem.', NULL, NULL, 1),
+('Diya Shah',          'Co-founder',       'Focused on building early club programming, partnerships, and long-term community growth.', NULL, NULL, 2),
+('Benicio Uhart',      'Co-founder',       'Helped shape the club''s founding strategy and student-facing venture programming.', NULL, NULL, 3),
+('Josh Michell',       'VP Operations',    'Supports execution across events, logistics, and the club''s internal operating cadence.', NULL, NULL, 4),
+('Hannah Lewin',       'VP Marketing',     'Leads brand, outreach, and audience growth across MVCC programs and events.', NULL, NULL, 5),
+('Hunaid Rajkotwala',  'Co-VP Education',  'Helps design educational programming around venture capital, startups, and investing.', NULL, NULL, 6),
+('Abhay Shenoy',       'Co-VP Education',  'Supports curriculum and learning experiences for analysts and general members.', NULL, NULL, 7);
 
 -- ─────────────────────────────────────────────
 --  SEED DATA — Partners
@@ -89,20 +91,20 @@ INSERT INTO partners (name, website_url, logo_url, category) VALUES
 --  SEED DATA — Events
 -- ─────────────────────────────────────────────
 
-INSERT INTO events (title, event_date, description, image_url) VALUES
+INSERT INTO events (title, event_date, location, description, image_url) VALUES
 (
   'Build Canada x MVCC Event with Colin Mang',
   '2024-11-01',
+  'McMaster University, Hamilton',
   'McMaster Venture Capital Club partnered with Build Canada for an exclusive event featuring Colin Mang. Members gained insights into the Canadian startup ecosystem, venture trends, and opportunities for student entrepreneurs.',
   NULL  -- TODO: swap in real image
 );
 
 -- ─────────────────────────────────────────────
 --  SEED DATA — Default Admin
---  Username: admin  |  Password: changeme123
---  Run password_hash('changeme123', PASSWORD_DEFAULT) in PHP to get a real hash.
+--  Username: admin
+--  Replace the placeholder hash before using the admin panel.
 -- ─────────────────────────────────────────────
 
 INSERT INTO admins (username, password_hash) VALUES
-('admin', '$2y$12$Nq5RxKtZRNLBGl9K3IH9WuQe7YzMrVw1lD3JYn4BkK5A2oFxRpGzO');
--- ^ placeholder hash — regenerate with: echo password_hash('changeme123', PASSWORD_DEFAULT);
+('admin', 'REPLACE_WITH_BCRYPT_HASH');

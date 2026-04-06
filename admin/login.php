@@ -3,7 +3,9 @@
  * admin/login.php
  * Admin login form. Validates against admins table with password_verify().
  */
-session_start();
+require_once __DIR__ . '/../includes/site.php';
+mvcc_start_session();
+$baseUrl = mvcc_base_url();
 
 // Already logged in — go straight to dashboard
 if (!empty($_SESSION['admin_id'])) {
@@ -14,7 +16,6 @@ if (!empty($_SESSION['admin_id'])) {
 require_once __DIR__ . '/../db/config.php';
 
 $error = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['admin_id']       = $admin['id'];
             $_SESSION['admin_username'] = $username;
+            mvcc_csrf_token();
             header('Location: dashboard.php');
             exit;
         } else {
@@ -46,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login | MVCC</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>assets/css/style.css">
   <style>
     body { display:flex; align-items:center; justify-content:center; min-height:100vh; background:var(--black); }
     .login-card {
@@ -93,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <p class="text-center mt-3">
-      <a href="/index.php" style="font-size:.78rem; color:var(--text-muted);">← Back to site</a>
+      <a href="<?= htmlspecialchars($baseUrl, ENT_QUOTES) ?>index.php" style="font-size:.78rem; color:var(--text-muted);">← Back to site</a>
     </p>
   </div>
 </body>

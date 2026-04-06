@@ -25,7 +25,7 @@
 /events.php             ← All events (filterable)
 /admin/
   login.php             ← Admin login (session-based)
-  dashboard.php         ← Session-gated panel (Members | Events | Partners)
+  dashboard.php         ← Session-gated panel (Members | Events | Executives | Partners)
   logout.php
 /api/
   register.php          ← Member sign-up (JSON)
@@ -37,9 +37,12 @@
   get_partners.php      ← Partners + associates (JSON)
   add_partner.php       ← Admin: add partner
   delete_partner.php    ← Admin: delete partner
+  add_executive.php     ← Admin: add executive
+  delete_executive.php  ← Admin: delete executive
 /db/
   config.php            ← PDO connection helper (edit credentials here)
   schema.sql            ← CREATE TABLE + seed data
+  migrate_20260405.sql  ← Adds `events.location` and `executives.bio` to existing DBs
 /assets/
   css/style.css         ← Full custom stylesheet (dark theme, gold accents)
   js/main.js            ← AJAX rendering, join form, email check
@@ -58,13 +61,27 @@
 SOURCE /path/to/db/schema.sql;
 ```
 
+If you already created the database before these updates, also run:
+
+```sql
+SOURCE /path/to/db/migrate_20260405.sql;
+```
+
 ### 2. Configure DB Credentials
 
-Edit `db/config.php` — set `DB_USER` and `DB_PASS`.
+Set environment variables when possible:
+
+- `MVCC_DB_HOST`
+- `MVCC_DB_PORT`
+- `MVCC_DB_NAME`
+- `MVCC_DB_USER`
+- `MVCC_DB_PASS`
+
+If you are running locally without environment variables, `db/config.php` falls back to the XAMPP defaults.
 
 ### 3. Fix the Admin Password
 
-The seed SQL contains a **placeholder** bcrypt hash. Generate a real one:
+The seed SQL contains a **placeholder** hash. Generate a real bcrypt hash:
 
 ```bash
 php tools/gen_hash.php yourSecurePassword
@@ -94,10 +111,10 @@ chown www-data:www-data assets/uploads/
 
 ## Admin Panel
 
-| URL                    | Default Credentials                   |
-|------------------------|---------------------------------------|
-| `/admin/login.php`     | `admin` / `changeme123` (change this!) |
-| `/admin/dashboard.php` | Tabs: Members · Events · Partners     |
+| URL                    | Notes                                              |
+|------------------------|----------------------------------------------------|
+| `/admin/login.php`     | Requires a real password hash in the `admins` table |
+| `/admin/dashboard.php` | Tabs: Members · Events · Executives · Partners      |
 
 ---
 
@@ -118,6 +135,8 @@ chown www-data:www-data assets/uploads/
 
 - All SQL uses **PDO prepared statements**.
 - Admin routes guard with `$_SESSION['admin_id']`; redirect to login if unset.
+- Admin write endpoints require a CSRF token.
 - Passwords stored with `password_hash(…, PASSWORD_DEFAULT)` (bcrypt).
+- Session cookies use `HttpOnly` and `SameSite=Lax`.
 - `db/` blocked by `.htaccess` (`Require all denied`).
 - `assets/uploads/` `.htaccess` disables PHP execution inside the upload dir.

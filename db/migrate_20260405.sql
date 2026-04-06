@@ -1,0 +1,7 @@
+USE mvcc;
+
+ALTER TABLE events
+    ADD COLUMN IF NOT EXISTS location VARCHAR(255) NULL AFTER event_date;
+
+ALTER TABLE executives
+    ADD COLUMN IF NOT EXISTS bio TEXT NULL AFTER role;

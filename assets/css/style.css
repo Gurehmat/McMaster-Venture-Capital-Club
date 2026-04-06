@@ -32,7 +32,10 @@
 /* ── Reset / Base ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
 
 body {
   background-color: var(--black);
@@ -77,6 +80,7 @@ h1, h2, h3, h4, h5 {
 /* ── Sections ─────────────────────────────────────────────── */
 .mvcc-section {
   padding: 90px 0;
+  scroll-margin-top: 96px;
 }
 .mvcc-section--dark {
   background-color: var(--surface);
@@ -181,6 +185,10 @@ h1, h2, h3, h4, h5 {
     url('../img/hero-bg.jpg') center/cover no-repeat;
   position: relative;
   overflow: hidden;
+}
+
+#roadmap {
+  padding-top: 120px;
 }
 #hero::before {
   content: '';
@@ -316,17 +324,7 @@ h1, h2, h3, h4, h5 {
 .roadmap-card h4 { font-size: 1.05rem; margin-bottom: .5rem; }
 .roadmap-card p  { font-size: .88rem; color: var(--text-muted); margin: 0; }
 .roadmap-dot {
-  width: 14px; height: 14px;
-  background: var(--gold);
-  border-radius: 50%;
-  border: 3px solid var(--black);
-  box-shadow: 0 0 0 2px var(--gold);
-  flex-shrink: 0;
-  margin: 1.2rem 1rem;
-  align-self: flex-start;
-}
-@media (min-width: 768px) {
-  .roadmap-dot { margin: 1.2rem -7px; align-self: flex-start; }
+  display: none;
 }
 
 /* ── Cards (Events / Exec) ────────────────────────────────── */
@@ -363,6 +361,11 @@ h1, h2, h3, h4, h5 {
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: .5rem;
+}
+.mvcc-card-meta {
+  font-size: .8rem;
+  color: var(--pastel-gold);
+  margin-bottom: .45rem;
 }
 .mvcc-card-title { font-size: 1.05rem; margin-bottom: .6rem; }
 .mvcc-card-text  { font-size: .875rem; color: var(--text-muted); margin: 0; }
@@ -403,6 +406,12 @@ h1, h2, h3, h4, h5 {
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: .9rem;
+}
+.exec-bio {
+  font-size: .84rem;
+  color: var(--text-muted);
+  margin: 0 0 .9rem;
+  min-height: 3.6em;
 }
 .exec-linkedin {
   display: inline-flex;

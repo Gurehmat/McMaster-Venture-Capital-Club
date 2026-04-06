@@ -1,6 +1,6 @@
 <?php
 /**
- * POST /api/delete_partner.php  (Admin only — session-gated)
+ * POST /api/delete_executive.php (Admin only — session-gated)
  * Body: { "id": <int> }
  */
 
@@ -24,15 +24,15 @@ if (!mvcc_verify_csrf($body['csrf_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? n
     exit;
 }
 
-$id = isset($body['id']) ? (int)$body['id'] : 0;
+$id = isset($body['id']) ? (int) $body['id'] : 0;
 if ($id <= 0) {
     http_response_code(422);
-    echo json_encode(['success' => false, 'error' => 'Invalid partner ID.']);
+    echo json_encode(['success' => false, 'error' => 'Invalid executive ID.']);
     exit;
 }
 
-$db   = getDB();
-$stmt = $db->prepare('DELETE FROM partners WHERE id = ?');
+$db = getDB();
+$stmt = $db->prepare('DELETE FROM executives WHERE id = ?');
 $stmt->execute([$id]);
 
-echo json_encode(['success' => true, 'message' => 'Partner deleted.']);
+echo json_encode(['success' => true, 'message' => 'Executive deleted.']);

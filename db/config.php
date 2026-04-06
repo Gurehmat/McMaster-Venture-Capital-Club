@@ -1,15 +1,15 @@
 <?php
 /**
  * Database connection — PDO (MySQL)
- * Update the constants below to match your environment.
+ * Override via environment variables in production.
  */
 
-define('DB_HOST', 'localhost');
-define('DB_PORT', '3306');
-define('DB_NAME', 'mvcc');
-define('DB_USER', 'root');       // ← change for production
-define('DB_PASS', '');           // ← change for production
-define('DB_CHARSET', 'utf8mb4');
+define('DB_HOST', getenv('MVCC_DB_HOST') ?: 'localhost');
+define('DB_PORT', getenv('MVCC_DB_PORT') ?: '3306');
+define('DB_NAME', getenv('MVCC_DB_NAME') ?: 'mvcc');
+define('DB_USER', getenv('MVCC_DB_USER') ?: 'root');
+define('DB_PASS', getenv('MVCC_DB_PASS') ?: '');
+define('DB_CHARSET', getenv('MVCC_DB_CHARSET') ?: 'utf8mb4');
 
 function getDB(): PDO {
     static $pdo = null;
